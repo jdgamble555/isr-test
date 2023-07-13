@@ -11,6 +11,7 @@ export const config = {
 export const actions = {
     default: async ({ fetch }) => {
         fetch('/', {
+            method: 'GET',
             headers: {
                 'x-prerender-revalidate': BYPASS_TOKEN
             }
