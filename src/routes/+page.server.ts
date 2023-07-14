@@ -10,7 +10,7 @@ export const config = {
 
 export const actions = {
     default: async ({ fetch }) => {
-        await fetch('/', {
+        await fetch('https://isr-test-ten.vercel.app', {
             headers: {
                 'x-prerender-revalidate': BYPASS_TOKEN
             }
