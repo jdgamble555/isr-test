@@ -9,7 +9,7 @@ export const config = {
 };
 
 export const actions = {
-    default: async ({ fetch }) => {
+    default: async () => {
         await fetch('https://isr-test-ten.vercel.app', {
             method: 'GET',
             headers: {
