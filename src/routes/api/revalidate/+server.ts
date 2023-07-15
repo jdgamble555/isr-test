@@ -4,7 +4,7 @@ import type { RequestHandler } from './$types';
 
 export const GET = (async ({ fetch }) => {
 
-    const x = await fetch('https://isr-test-ten.vercel.app', {
+    const x = await fetch('/', {
         headers: {
             'x-prerender-revalidate': BYPASS_TOKEN
         }

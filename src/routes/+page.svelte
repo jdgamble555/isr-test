@@ -9,3 +9,4 @@
 <p>Random Number: {data.n}</p>
 
 <button type="submit" on:click={() => fetch('/api/revalidate').then(r => console.log(r.json()))}>Invalidate</button>
+<button on:click={() => window.location.reload()}>Refresh</button>
