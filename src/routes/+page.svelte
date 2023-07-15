@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { PageServerData } from "./$types";
-    export let data: PageServerData;
+	import type { PageServerData } from './$types';
+	export let data: PageServerData;
 </script>
 
 <h1>Welcome to SvelteKit</h1>
@@ -8,6 +8,4 @@
 
 <p>Random Number: {data.n}</p>
 
-<form method="POST">
-    <button type="submit">Invalidate</button>
-</form>
+<button type="submit" on:click={() => fetch('/api/revalidate').then(r => console.log(r.json()))}>Invalidate</button>
