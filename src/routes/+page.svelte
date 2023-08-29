@@ -1,19 +1,35 @@
 <script lang="ts">
+	import { applyAction, enhance } from '$app/forms';
+	import type { SubmitFunction } from '@sveltejs/kit';
 	import type { PageServerData } from './$types';
 	export let data: PageServerData;
 
 	let invalidated = false;
+
+	const revalidate: SubmitFunction<{ success: boolean }> = () => {
+		return async ({ result }) => {
+			switch (result.type) {
+				case 'failure':
+					applyAction(result);
+					break;
+				case 'error':
+					console.error(result.error);
+					break;
+				case 'success':
+					invalidated = true;
+			}
+		};
+	};
 </script>
 
 <h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
 
 <p>Random Number: {data.n}</p>
+<form method="post" use:enhance={revalidate}>
+	<button formaction="/revalidate">Invalidate</button>
+	<button on:click={() => window.location.reload()}>Refresh</button>
+</form>
 
-<button type="submit" on:click={() => fetch('/api/revalidate').then(() => (invalidated = true))}>
-	Invalidate
-</button>
-<button on:click={() => window.location.reload()}>Refresh</button>
 {#if invalidated}
 	<p style={'color:red'}>Invalidated!</p>
 {/if}
